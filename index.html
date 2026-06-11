@@ -6,22 +6,89 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<main>
-		<section>
-			<h1>magaming</h1>
-			<nav>
-				<ul>
-					<li><a href="https://twitter.com/magaming"><i class="fab fa-twitter"></i>Twitter</a></li>
-					<li><a href="https://manga-no.com/@magaming"><i class="fas fa-book"></i>Mangano</a></li>
-					<li><a href="https://magaming.hatenablog.com/"><i class="far fa-newspaper"></i>Blog</a></li>
-					<li><a href="https://github.com/Magaming"><i class="fab fa-github"></i>GitHub</a></li>
-				</ul>
-			</nav>
-			<h2>自己紹介</h2>
-			<p>web エンジニアをやっています。たまに漫画を書いたり、楽器を弾いたりします。</p>
-			<p><em>このページは ChatGPT で作っています</em></p>
-		</section>
-	</main>
+	<div class="scanlines"></div>
+	<div class="desktop">
+		<marquee class="status-marquee" scrollamount="6">★☆★ WELCOME TO MAGAMING'S HOMEPAGE ★☆★ ようこそ！ぜひ掲示板に書き込んでね（※掲示板はありません） — Best viewed at 1024x768 —</marquee>
+
+		<main>
+			<section class="window window--main">
+				<header class="title-bar">
+					<span class="title-bar__text">C:\HOME\MAGAMING.EXE</span>
+					<div class="title-bar__controls">
+						<button class="title-bar__btn" aria-label="minimize">_</button>
+						<button class="title-bar__btn" aria-label="maximize">□</button>
+						<button class="title-bar__btn title-bar__btn--close" aria-label="close">×</button>
+					</div>
+				</header>
+				<div class="window__body">
+					<h1 class="glitch" data-text="magaming">magaming</h1>
+					<p class="subtitle">&gt; PERSONAL_HOMEPAGE.HTML // LOADED OK_</p>
+				</div>
+			</section>
+
+			<section class="window window--links">
+				<header class="title-bar">
+					<span class="title-bar__text">LINKS.DIR</span>
+					<div class="title-bar__controls">
+						<button class="title-bar__btn" aria-label="minimize">_</button>
+						<button class="title-bar__btn" aria-label="maximize">□</button>
+						<button class="title-bar__btn title-bar__btn--close" aria-label="close">×</button>
+					</div>
+				</header>
+				<div class="window__body">
+					<nav>
+						<ul>
+							<li><a href="https://twitter.com/magaming"><i class="fab fa-x-twitter"></i><span>X</span></a></li>
+							<li><a href="https://manga-no.com/@magaming"><i class="fas fa-book"></i><span>Mangano</span></a></li>
+							<li><a href="https://magaming.hatenablog.com/"><i class="far fa-newspaper"></i><span>Blog</span></a></li>
+							<li><a href="https://github.com/Magaming"><i class="fab fa-github"></i><span>GitHub</span></a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+			<section class="window window--about">
+				<header class="title-bar">
+					<span class="title-bar__text">README.TXT - メモ帳</span>
+					<div class="title-bar__controls">
+						<button class="title-bar__btn" aria-label="minimize">_</button>
+						<button class="title-bar__btn" aria-label="maximize">□</button>
+						<button class="title-bar__btn title-bar__btn--close" aria-label="close">×</button>
+					</div>
+				</header>
+				<div class="window__body window__body--notepad">
+					<h2>&gt; 自己紹介</h2>
+					<p>web エンジニアをやっています。たまに漫画を書いたり、楽器を弾いたりします。</p>
+					<p class="hr">──────────────────────────────</p>
+					<p class="blink">_</p>
+				</div>
+			</section>
+
+			<footer class="taskbar">
+				<div class="taskbar__start">
+					<span class="taskbar__logo">■</span> START
+				</div>
+				<div class="taskbar__tasks">
+					<span class="taskbar__task taskbar__task--active">MAGAMING.EXE</span>
+				</div>
+				<div class="taskbar__tray">
+					<span class="taskbar__clock" id="clock">00:00</span>
+				</div>
+			</footer>
+		</main>
+	</div>
+
+	<script src="https://kit.fontawesome.com/dc12a5b4f9.js" crossorigin="anonymous"></script>
+	<script>
+		const clock = document.getElementById('clock');
+		const tick = () => {
+			const d = new Date();
+			const hh = String(d.getHours()).padStart(2, '0');
+			const mm = String(d.getMinutes()).padStart(2, '0');
+			clock.textContent = `${hh}:${mm}`;
+		};
+		tick();
+		setInterval(tick, 30000);
+	</script>
 </body>
-<script src="https://kit.fontawesome.com/dc12a5b4f9.js" crossorigin="anonymous"></script>
 </html>

@@ -1,69 +1,475 @@
-/* 全体のスタイル */
+/* ============================================
+   00年代サイバー × Win9x スタイル
+   ============================================ */
+
+:root {
+	--win-gray: #c3c3c3;
+	--win-gray-dark: #808080;
+	--win-gray-darker: #404040;
+	--win-white: #ffffff;
+	--win-blue: #000080;
+	--win-cyan: #00ffff;
+	--win-magenta: #ff00ff;
+	--win-green: #00ff66;
+	--bg-cyber: #0a0a1a;
+}
+
+* {
+	box-sizing: border-box;
+}
+
 body {
 	margin: 0;
 	padding: 0;
-	font-size: 16px;
+	font-family: "MS PGothic", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "Osaka", sans-serif;
+	font-size: 14px;
 	line-height: 1.5;
-	font-family: sans-serif;
+	color: #000;
+	background:
+		radial-gradient(ellipse at 20% 0%, rgba(255, 0, 255, 0.15), transparent 50%),
+		radial-gradient(ellipse at 80% 100%, rgba(0, 255, 255, 0.15), transparent 50%),
+		repeating-linear-gradient(
+			0deg,
+			rgba(0, 255, 255, 0.06) 0px,
+			rgba(0, 255, 255, 0.06) 1px,
+			transparent 1px,
+			transparent 3px
+		),
+		linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 50%, #0a1a2a 100%);
+	background-attachment: fixed;
+	min-height: 100vh;
+	overflow-x: hidden;
 }
 
-/* main 要素のスタイル */
+/* CRT スキャンライン */
+.scanlines {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 9999;
+	background: repeating-linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0.18) 0px,
+		rgba(0, 0, 0, 0.18) 1px,
+		transparent 1px,
+		transparent 3px
+	);
+	mix-blend-mode: multiply;
+}
+.scanlines::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(transparent, rgba(0, 255, 255, 0.04) 50%, transparent);
+	animation: scan 6s linear infinite;
+}
+@keyframes scan {
+	0% { transform: translateY(-100%); }
+	100% { transform: translateY(100%); }
+}
+
+/* マーキー */
+.status-marquee {
+	display: block;
+	background: linear-gradient(90deg, #000080, #4040c0, #000080);
+	color: #ffff00;
+	font-family: "MS Gothic", monospace;
+	font-size: 13px;
+	letter-spacing: 1px;
+	padding: 4px 0;
+	border-bottom: 2px solid var(--win-cyan);
+	text-shadow: 0 0 6px #ffff00;
+}
+
+/* デスクトップ風コンテナ */
+.desktop {
+	padding-bottom: 40px;
+}
+
 main {
-	max-width: 800px;
-	margin: 0 auto;
-	padding: 20px;
+	max-width: 720px;
+	margin: 30px auto 0;
+	padding: 0 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
 }
 
-/* セクションのスタイル */
-section {
-	margin-bottom: 40px;
+/* ============================================
+   Win9x 風ウインドウ
+   ============================================ */
+.window {
+	background: var(--win-gray);
+	border-top: 2px solid var(--win-white);
+	border-left: 2px solid var(--win-white);
+	border-right: 2px solid var(--win-gray-darker);
+	border-bottom: 2px solid var(--win-gray-darker);
+	box-shadow:
+		inset -1px -1px 0 var(--win-gray-dark),
+		inset 1px 1px 0 var(--win-gray),
+		4px 4px 0 rgba(0, 0, 0, 0.6),
+		0 0 24px rgba(255, 0, 255, 0.35);
+	padding: 2px;
+	margin: 0;
+	position: relative;
 }
 
-/* ナビゲーションのスタイル */
+.window--main {
+	transform: rotate(-0.4deg);
+}
+.window--links {
+	transform: rotate(0.3deg);
+}
+.window--about {
+	transform: rotate(-0.2deg);
+}
+
+/* タイトルバー */
+.title-bar {
+	background: linear-gradient(
+		90deg,
+		var(--win-blue) 0%,
+		#1084d0 100%
+	);
+	color: var(--win-white);
+	padding: 3px 4px 3px 6px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: bold;
+	font-family: "MS Sans Serif", "MS PGothic", sans-serif;
+	font-size: 13px;
+	letter-spacing: 0.5px;
+}
+
+.title-bar__text {
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.title-bar__controls {
+	display: flex;
+	gap: 2px;
+}
+
+.title-bar__btn {
+	width: 18px;
+	height: 16px;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: "MS Sans Serif", sans-serif;
+	line-height: 1;
+	padding: 0;
+	background: var(--win-gray);
+	color: #000;
+	border-top: 1px solid var(--win-white);
+	border-left: 1px solid var(--win-white);
+	border-right: 1px solid var(--win-gray-darker);
+	border-bottom: 1px solid var(--win-gray-darker);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.title-bar__btn:active {
+	border-top: 1px solid var(--win-gray-darker);
+	border-left: 1px solid var(--win-gray-darker);
+	border-right: 1px solid var(--win-white);
+	border-bottom: 1px solid var(--win-white);
+}
+
+.title-bar__btn--close {
+	font-size: 12px;
+}
+
+.window__body {
+	background: var(--win-gray);
+	padding: 16px 20px;
+}
+
+/* ============================================
+   メインタイトル（グリッチ）
+   ============================================ */
+.window--main .window__body {
+	background:
+		repeating-linear-gradient(
+			0deg,
+			rgba(0, 0, 0, 0.04) 0px,
+			rgba(0, 0, 0, 0.04) 2px,
+			transparent 2px,
+			transparent 4px
+		),
+		linear-gradient(135deg, #1a1a2e, #0f0f1f);
+	padding: 32px 20px;
+	text-align: center;
+	color: var(--win-cyan);
+}
+
+h1.glitch {
+	position: relative;
+	font-family: "Impact", "Arial Black", sans-serif;
+	font-size: 64px;
+	font-weight: bold;
+	letter-spacing: 4px;
+	margin: 0 0 8px;
+	color: var(--win-cyan);
+	text-shadow:
+		0 0 8px var(--win-cyan),
+		0 0 16px rgba(0, 255, 255, 0.4);
+	animation: flicker 4s infinite;
+}
+
+h1.glitch::before,
+h1.glitch::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+h1.glitch::before {
+	color: var(--win-magenta);
+	text-shadow: 0 0 6px var(--win-magenta);
+	animation: glitch-left 2.6s infinite linear alternate-reverse;
+	clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+h1.glitch::after {
+	color: var(--win-green);
+	text-shadow: 0 0 6px var(--win-green);
+	animation: glitch-right 3.1s infinite linear alternate-reverse;
+	clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-left {
+	0%   { transform: translate(0, 0); }
+	20%  { transform: translate(-3px, 1px); }
+	40%  { transform: translate(2px, -2px); }
+	60%  { transform: translate(-2px, 2px); }
+	80%  { transform: translate(3px, -1px); }
+	100% { transform: translate(0, 0); }
+}
+
+@keyframes glitch-right {
+	0%   { transform: translate(0, 0); }
+	20%  { transform: translate(3px, -1px); }
+	40%  { transform: translate(-2px, 2px); }
+	60%  { transform: translate(2px, -2px); }
+	80%  { transform: translate(-3px, 1px); }
+	100% { transform: translate(0, 0); }
+}
+
+@keyframes flicker {
+	0%, 100% { opacity: 1; }
+	48%      { opacity: 1; }
+	49%      { opacity: 0.4; }
+	50%      { opacity: 1; }
+	95%      { opacity: 1; }
+	96%      { opacity: 0.6; }
+	97%      { opacity: 1; }
+}
+
+.subtitle {
+	font-family: "MS Gothic", "Courier New", monospace;
+	color: var(--win-green);
+	font-size: 13px;
+	letter-spacing: 1px;
+	margin: 0;
+	text-shadow: 0 0 4px var(--win-green);
+}
+
+/* ============================================
+   リンクウインドウ
+   ============================================ */
+.window--links .window__body {
+	padding: 14px 18px;
+}
+
 nav ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 8px;
 }
 
 nav li {
-	margin-right: 20px;
+	margin: 0;
 }
 
 nav a {
 	display: flex;
 	align-items: center;
-	color: #333;
+	gap: 10px;
+	padding: 8px 10px;
+	background: var(--win-gray);
+	color: #000;
 	text-decoration: none;
-	transition: opacity 0.3s;
+	font-size: 14px;
+	font-weight: bold;
+	border-top: 2px solid var(--win-white);
+	border-left: 2px solid var(--win-white);
+	border-right: 2px solid var(--win-gray-darker);
+	border-bottom: 2px solid var(--win-gray-darker);
+	transition: none;
 }
 
 nav a:hover {
-	opacity: 0.7;
+	background: var(--win-blue);
+	color: var(--win-cyan);
+	text-shadow: 0 0 4px var(--win-cyan);
+}
+
+nav a:hover i {
+	color: var(--win-cyan);
+}
+
+nav a:active {
+	border-top: 2px solid var(--win-gray-darker);
+	border-left: 2px solid var(--win-gray-darker);
+	border-right: 2px solid var(--win-white);
+	border-bottom: 2px solid var(--win-white);
 }
 
 nav a i {
-	font-size: 24px;
-	margin-right: 10px;
+	font-size: 20px;
+	color: var(--win-blue);
+	width: 22px;
+	text-align: center;
 }
 
-/* 見出しのスタイル */
-h1, h2 {
-	font-weight: normal;
-	margin-bottom: 10px;
+/* ============================================
+   メモ帳風 about
+   ============================================ */
+.window__body--notepad {
+	background: var(--win-white);
+	padding: 18px 20px;
+	font-family: "MS PGothic", "Osaka", sans-serif;
 }
 
-h1 {
-	font-size: 36px;
+.window__body--notepad h2 {
+	font-family: "MS Gothic", "Courier New", monospace;
+	font-size: 16px;
+	color: var(--win-blue);
+	margin: 0 0 10px;
+	font-weight: bold;
 }
 
-h2 {
-	font-size: 24px;
+.window__body--notepad p {
+	margin: 6px 0;
+	color: #000;
 }
 
-/* 段落のスタイル */
-p {
-	margin-bottom
+.window__body--notepad em {
+	color: var(--win-magenta);
+	font-style: normal;
+	font-weight: bold;
+}
+
+.hr {
+	color: var(--win-gray-dark);
+	font-family: monospace;
+	letter-spacing: 0;
+	margin: 10px 0 !important;
+}
+
+.blink {
+	animation: blink 1s steps(2, start) infinite;
+	font-family: monospace;
+	font-weight: bold;
+	color: var(--win-blue);
+}
+
+@keyframes blink {
+	to { visibility: hidden; }
+}
+
+/* ============================================
+   タスクバー
+   ============================================ */
+.taskbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	background: var(--win-gray);
+	border-top: 2px solid var(--win-white);
+	display: flex;
+	align-items: center;
+	padding: 2px 4px;
+	gap: 4px;
+	z-index: 100;
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.taskbar__start {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 2px 10px 2px 6px;
+	font-weight: bold;
+	font-family: "MS Sans Serif", sans-serif;
+	font-size: 13px;
+	background: var(--win-gray);
+	border-top: 2px solid var(--win-white);
+	border-left: 2px solid var(--win-white);
+	border-right: 2px solid var(--win-gray-darker);
+	border-bottom: 2px solid var(--win-gray-darker);
+	cursor: pointer;
+}
+
+.taskbar__logo {
+	color: var(--win-blue);
+	font-size: 14px;
+}
+
+.taskbar__tasks {
+	flex: 1;
+	display: flex;
+	gap: 4px;
+}
+
+.taskbar__task {
+	padding: 2px 12px;
+	font-size: 12px;
+	background: var(--win-gray);
+	border-top: 1px solid var(--win-gray-darker);
+	border-left: 1px solid var(--win-gray-darker);
+	border-right: 1px solid var(--win-white);
+	border-bottom: 1px solid var(--win-white);
+}
+
+.taskbar__task--active {
+	background: linear-gradient(180deg, #d0d0d0, #b8b8b8);
+}
+
+.taskbar__tray {
+	padding: 2px 8px;
+	border-top: 1px solid var(--win-gray-darker);
+	border-left: 1px solid var(--win-gray-darker);
+	border-right: 1px solid var(--win-white);
+	border-bottom: 1px solid var(--win-white);
+	font-family: "MS Sans Serif", sans-serif;
+	font-size: 12px;
+}
+
+/* ============================================
+   レスポンシブ
+   ============================================ */
+@media (max-width: 480px) {
+	h1.glitch {
+		font-size: 44px;
+		letter-spacing: 2px;
+	}
+	nav ul {
+		grid-template-columns: 1fr;
+	}
+	main {
+		padding: 0 10px;
+	}
 }
