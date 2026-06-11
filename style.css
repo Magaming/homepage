@@ -377,6 +377,19 @@ nav a i {
 	margin: 10px 0 !important;
 }
 
+.season__label {
+	font-family: "MS Gothic", "Courier New", monospace;
+	color: var(--win-blue);
+	font-weight: bold;
+	margin: 8px 0 4px !important;
+}
+
+.season__phrase {
+	margin: 0 0 4px !important;
+	padding-left: 14px;
+	color: #000;
+}
+
 .blink {
 	animation: blink 1s steps(2, start) infinite;
 	font-family: monospace;
